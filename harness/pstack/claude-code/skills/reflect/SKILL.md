@@ -50,7 +50,7 @@ Present the synthesizer's full Accepted / Rejected / Backlog output and wait for
 
 File each Backlog item to your team's devex or backlog tracker without waiting. Only the Accepted list waits for approval.
 
-Never edit a skill under `plugins/cache/`. Before approval, show its destination, `.cursor/skills/<skill>/` or `~/.cursor/skills/<skill>/`. After approval, copy the skill folder there and edit the copy. Never open a PR or push.
+Never edit a skill under `plugins/cache/`. Before approval, show the source destination. For pstack skills in this fork, use `pstack/skills/<skill>/` in the fork checkout and follow the publishing steps below. For unrelated skills, copy to `.cursor/skills/<skill>/` or `~/.cursor/skills/<skill>/` after approval. Do not publish unrelated skills through this workflow.
 
 Follow each approved row's Routing exactly:
 
@@ -60,6 +60,18 @@ Follow each approved row's Routing exactly:
 - `new skill via create-skill: <kebab-name>`: hand creation to `create-skill`. Do not invent the shape ad hoc.
 
 If your environment ships a SKILL.md validator, run it on every touched skill before declaring done.
+
+### Publish approved pstack edits
+
+Approved pstack edits in this fork include publishing the fork and its dotfiles pin, unless the user requests local-only changes. Existing explicit approval counts. Do not ask again for the same edits.
+
+1. Reuse a checkout of `https://github.com/abhishek-pandya/plugins.git`, or clone it into a writable workspace. A sparse checkout needs `pstack`, `harness/pstack`, and `scripts`. Verify the remote before editing. Fetch and start from the fork's current `main`. Preserve unrelated work with a separate worktree when needed.
+2. Edit `pstack/skills/<skill>/`, never the generated `harness/pstack/claude-code/` files directly. For each release, increment the fork prerelease suffix, such as `0.15.36-abhi.1` to `0.15.36-abhi.2`, in both `pstack/plugin.json` and `pstack/.cursor-plugin/plugin.json`. If there is no suffix, append `-abhi.1`. Run `node scripts/generate-pstack-harness-trees.mjs`, then its `--check` mode and checks appropriate to the skill change.
+3. Commit only the intended source, manifest, and generated changes. Push to the fork's `main` without force. Verify the published commit exists on the remote before updating dotfiles. If a concurrent push wins, integrate it and rerun the checks before retrying.
+4. Reuse or clone `https://github.com/abhishek-pandya/dotfiles.git`. Start from its current `main`, using a separate worktree when needed to preserve unrelated work. In `.claude-plugin/marketplace.json`, find the `pstack` entry and verify its source points to the fork and `./harness/pstack/claude-code`. Set `source.sha` to the published fork commit. Update the documented pin and plugin version in `ai/README.md`. Run `python3 tests/test-install-skills.py`, `python3 tests/test-bootstrap.py`, and `git diff --check`. Commit those dotfiles changes and push without force.
+5. Verify both remote commits and the pin relationship. Report both commit links. If either publication fails, report the completed step and the remaining step. Never report delivery as complete after only the fork push.
+
+New Ona instances receive the published version when normal bootstrap uses the latest dotfiles checkout. Existing enabled installations are skipped by `install-skills.sh`; a bootstrap rerun alone does not upgrade them. Use the plugin refresh instructions in dotfiles' `ai/README.md` when an existing installation must update, then start a new agent session. Do not add a recurring updater or bypass an organization's plugin policy.
 
 ## 6. Summarize for the user
 
