@@ -50,12 +50,14 @@ File each Backlog item to your team's devex or backlog tracker without waiting. 
 
 Never edit a skill under `plugins/cache/`. Before approval, show the source destination. For pstack skills in this fork, use `pstack/skills/<skill>/` in the fork checkout and follow the publishing steps below. For unrelated skills, copy to `.cursor/skills/<skill>/` or `~/.cursor/skills/<skill>/` after approval. Do not publish unrelated skills through this workflow.
 
+If no skill-authoring skill is available, follow `../poteto-mode/playbooks/authoring-a-skill.md`.
+
 Follow each approved row's Routing exactly:
 
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): the parent does it directly.
-- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): hand to Cursor's built-in `create-skill` skill and run its draft / test / iterate loop.
-- `tune description: <skill path>` (the skill exists but didn't trigger when it should have): hand to `create-skill` and run its description-optimization loop.
-- `new skill via create-skill: <kebab-name>`: hand creation to `create-skill`. Do not invent the shape ad hoc.
+- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): hand to an available skill-authoring skill and run its draft / test / iterate loop.
+- `tune description: <skill path>` (the skill exists but didn't trigger when it should have): hand to the available skill-authoring skill and run its description-optimization loop.
+- `new skill: <kebab-name>`: hand creation to the available skill-authoring skill. Do not invent the shape ad hoc.
 
 If your environment ships a SKILL.md validator, run it on every touched skill before declaring done.
 

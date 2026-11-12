@@ -6,9 +6,11 @@ Use this reference when the Babysit playbook (`../playbooks/babysit.md`) handles
 
 Classify each Bugbot thread before acting:
 
-- `fix`: The comment identifies a plausible correctness, security, privacy, data loss, auth, billing, migration, idempotency, race, or shipped-behavior issue. Fix it in the lowest owning PR, then reply with the commit SHA and resolve the thread.
-- `dismiss`: The comment matches a documented low-risk noisy pattern, and the current code/context proves the concern does not need a code change. Reply with a short reason and resolve the thread.
+- `fix`: The comment identifies a plausible correctness, security, privacy, data loss, auth, billing, migration, idempotency, race, or shipped-behavior issue. Fix it in the lowest owning PR, then reply with the commit SHA and resolve the thread, subject to the posting rule below.
+- `dismiss`: The comment matches a documented low-risk noisy pattern, and the current code/context proves the concern does not need a code change. Reply with a short reason and resolve the thread, subject to the posting rule below.
 - `ask`: The comment is novel, high-severity, security/privacy/data-related, or ambiguous. Ask the user instead of guessing.
+
+Posting rule: post or resolve only when the user asked for it or invoked a mode whose scope includes replying (`playbooks/babysit.md` `drive` or `threads-only`, or an Autopilot owner brief). Otherwise draft the reply in your report. End every posted reply with `🤖 Posted by <agent> on <username>'s behalf after <provenance>.`
 
 When in doubt, ask. Skipping a noisy code-quality comment is cheap; skipping a real data or security bug is not.
 
@@ -40,7 +42,7 @@ Use `candidate` for one or two examples. Use `recurring` after multiple real dis
 ### Upstack or stack-local usage Bugbot cannot see
 
 - Confidence: candidate
-- Skip when: Bugbot flags an export, component, helper, or file as unused, and the active forge's PR list and diffs, upper-stack diffs, or PR context show it is used by a later PR in the stack.
+- Skip when: Bugbot flags an export, component, helper, or file as unused, and GitHub's PR list and diffs, upper-stack diffs, or PR context show it is used by a later PR in the stack.
 - Do not skip when: The current PR is not part of a stack, the symbol is public API, or the supposed upstack use cannot be verified.
 - Example signal: "Exported component is never used" with a human reply like "used upstack".
 
