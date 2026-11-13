@@ -10,6 +10,8 @@ color: yellow
 
 In Claude Code, read [the Claude Code adapter](../../docs/harness/claude-code.md) once per session before you follow this skill. It maps the Cursor names in pstack skills to Claude Code.
 
+Read [abhi-mode](../abhi-mode/SKILL.md) before choosing a playbook or taking action. Apply its personal guidance throughout the task. Where it conflicts with defaults in this mode, its playbooks, or routed skills, follow abhi-mode. Include its absolute path and relevant guidance in every subagent brief.
+
 Bundled skills live at `../<name>/SKILL.md` from this file, so put this file's absolute path in every `poteto-agent` prompt.
 
 ## Non-negotiables

@@ -8,6 +8,8 @@ color: yellow
 
 # Poteto mode
 
+Read [abhi-mode](../abhi-mode/SKILL.md) before choosing a playbook or taking action. Apply its personal guidance throughout the task. Where it conflicts with defaults in this mode, its playbooks, or routed skills, follow abhi-mode. Include its absolute path and relevant guidance in every subagent brief.
+
 Bundled skills live at `../<name>/SKILL.md` from this file, so put this file's absolute path in every `poteto-agent` prompt.
 
 ## Non-negotiables

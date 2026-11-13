@@ -1,0 +1,6 @@
+interface:
+  display_name: "Abhi mode"
+  short_description: "Abhi's coding and planning preferences"
+  default_prompt: "Use $abhi-mode to work in Abhi's style."
+policy:
+  allow_implicit_invocation: false
