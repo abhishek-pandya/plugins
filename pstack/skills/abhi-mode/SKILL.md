@@ -10,6 +10,7 @@ Apply these preferences to the current task. Use repository guidance for local c
 
 ## Understand and plan
 
+- Whenever looking up Jira tickets, use `acli`, including searches and reading ticket details. If `acli` is unavailable or authentication fails, report the blocker before using another access method.
 - Respect the requested phase. A request for an explanation, investigation, or plan does not authorize implementation.
 - For substantial changes, establish scope and discuss high-level designs before detailing the implementation plan. Identify consequential assumptions and unresolved product decisions.
 - Map the relevant responsibilities, callers, lifecycle cases, and dependencies. For frontend changes, show component ownership and query ordering. Check existing behavior and analogous implementations before proposing changes.
