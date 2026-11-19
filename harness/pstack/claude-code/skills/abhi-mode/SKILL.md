@@ -10,6 +10,7 @@ Apply these preferences to the current task. Use repository guidance for local c
 
 ## Understand and plan
 
+- When asked to implement a well-scoped Jira ticket, read [implement-jira-ticket](../implement-jira-ticket/SKILL.md) and use its flow. Confirm that the goal, implementation approach, and relationship to other changes are clear. If they are not, tell the user the ticket lacks enough information for this flow. When already executing that skill, continue its current step rather than restarting it.
 - Whenever looking up Jira tickets, use `acli`, including searches and reading ticket details. If `acli` is unavailable or authentication fails, report the blocker before using another access method.
 - Respect the requested phase. A request for an explanation, investigation, or plan does not authorize implementation.
 - For substantial changes, establish scope and discuss high-level designs before detailing the implementation plan. Identify consequential assumptions and unresolved product decisions.
