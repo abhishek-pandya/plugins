@@ -13,15 +13,17 @@ Follow [abhi-mode](../abhi-mode/SKILL.md). Use the Jira CLI `acli` to fetch tick
 
 The goal, implementation approach, and relationship to other changes must be clear; minor implementation decisions may remain open. If required context is missing or these points remain unclear, tell the user the ticket does not have enough information to use this flow and identify the gaps. Do not proceed with implementation under this skill.
 
-Identify the branches and PRs for prerequisite tickets and check whether they have merged. If this ticket depends on unmerged work, propose basing its branch on the dependency branch. If dependencies already form a stack, use the branch that contains all required changes. If more than one prerequisite branch remains unmerged, warn the user during investigation: name the branches and PRs, explain the risk of repeated rebases, conflicts, and review churn, and propose a base and sequencing plan. If no single branch contains all prerequisites, make that explicit rather than silently combining branches.
+Identify the branches and PRs for prerequisite tickets and check whether they have merged. If exactly one dependency branch remains unmerged, select it as the base and continue the investigation without asking for branch approval. After the investigation is approved, proceed on that base without another branch approval request. If no dependency branches remain unmerged, use the repository's normal base.
 
-Present your understanding of the changes needed to accomplish the ticket, including scope, dependencies, proposed base branch, any dependency warning, and how completion will be verified. Wait for the user's confirmation before proceeding.
+Ask for approval of the dependency plan only when more than one dependency branch remains unmerged. Name the branches and PRs, warn about repeated rebases, conflicts, and review churn, and propose a base and sequencing plan for approval. If dependencies already form a stack, propose the branch that contains all required changes. If no single branch contains all prerequisites, make that explicit rather than silently combining branches. Include this approval request with the investigation deliverable when possible.
+
+**The first deliverable is a review-ready understanding of what changes are needed to accomplish the ticket.** Present the scope, implementation approach, dependencies, selected or proposed base branch, any dependency warning, and how completion will be verified. Stop and explicitly ask the user to review and approve this understanding before proceeding to implementation. Do not write implementation code or delegate implementation until the user approves this deliverable. This checkpoint applies even with zero or one dependency branch. Earlier approval of a dependency plan does not replace approval of the investigation deliverable.
 
 ## 2. Implement
 
 Use [poteto-mode](../poteto-mode/SKILL.md) and its matching playbook to implement and verify the confirmed scope. Continue this flow when abhi-mode routes back here; do not restart investigation. Defer the playbook's Opening a PR step until step 5 below. If a draft PR already exists, use it.
 
-Base the work on the confirmed dependency branch while its prerequisite changes remain unmerged; use the repository's normal base once those changes have merged. Target the draft PR at the dependency branch when stacking, and review the ticket's diff against that base. Follow the confirmed sequencing plan when multiple prerequisite branches are involved.
+Base the work on the automatically selected single dependency branch or the approved base for multiple dependencies while prerequisite changes remain unmerged; use the repository's normal base once those changes have merged. Target the draft PR at the dependency branch when stacking, and review the ticket's diff against that base. Follow the approved sequencing plan when multiple prerequisite branches are involved.
 
 ## 3. Independent review
 
